@@ -16,24 +16,9 @@
 // 2) the letters from the set may occur multiple times
 //    eg.)  figeehaaita returns  ehaai
 
-// copy set
-// find index of first occurrence any letter from the set
-// for each letter in string test is in set
-//  remove found letter from set copy
-//  store index -> start
-//
-// store substring start and length (or end)
-// beginning at start + 1 repeat
-
-// testing for character in set
-
 const isInSet = (char, set) => {
   let found = set.filter((c) => c === char);
   return found.length === 1;
-};
-const remove = (char, set) => {
-  let newSet = set.filter((c) => c !== char);
-  return newSet;
 };
 
 const initializeCounts = (set) => {
