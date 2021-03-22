@@ -25,8 +25,23 @@ const newNode = (number) => {
   };
   return node;
 };
-function remove() {
+function remove(place = 0) {
   if (head === null) return;
+  if (place === 0) {
+    console.log(`remove ${head.value} from ${place}`);
+    head = head.next;
+    size -= 1;
+  } else {
+    place = place >= size ? size - 1 : place;
+    let prev = head;
+    let current = head;
+    for (let i = 0; i < place; i++) {
+      prev = current;
+      current = current.next;
+    }
+    prev.next = current.next;
+    size -= 1;
+  }
 }
 function insert(item, place = 0) {
   let number = parseInt(item, 10);
@@ -86,7 +101,6 @@ function writeOutput(inputData) {
       case 'f':
         // console.log(`insert ${line[1]}`)
         let value = parseInt(line[1], 10);
-        // console.log(value)
         insert(line[1]);
         printList();
         break;
@@ -102,7 +116,7 @@ function writeOutput(inputData) {
         break;
       case 'd':
         // console.log(`delete node at ${line[1]}`);
-        // delete(line[1])
+        remove(line[1]);
         printList();
         break;
       default:
