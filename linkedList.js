@@ -28,9 +28,7 @@ const newNode = (number) => {
 function remove(place = 0) {
   if (head === null) return;
   if (place === 0) {
-    console.log(`remove ${head.value} from ${place}`);
     head = head.next;
-    size -= 1;
   } else {
     place = place >= size ? size - 1 : place;
     let prev = head;
@@ -40,8 +38,8 @@ function remove(place = 0) {
       current = current.next;
     }
     prev.next = current.next;
-    size -= 1;
   }
+  size -= 1;
 }
 function insert(item, place = 0) {
   let number = parseInt(item, 10);
@@ -55,7 +53,6 @@ function insert(item, place = 0) {
       node.next = head;
       head = node;
     } else {
-      place = place > size ? size : place;
       // insert in middle
       let current = head;
       let prev = head;
