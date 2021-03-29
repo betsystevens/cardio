@@ -6,7 +6,7 @@
 // usage: node readMatrix.js
 // ctrl-d to end input
 
-process.stdin.resume();
+// process.stdin.resume();
 process.stdin.setEncoding('ascii');
 var inputData = '';
 process.stdin.on('data', (chunk) => {
