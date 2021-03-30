@@ -1,3 +1,4 @@
+'use strict';
 // given r and list of integers
 // count the number of triplets
 // where {i,j,k} are a geometric sequence
@@ -49,6 +50,25 @@
   *   entries(n/r) r property.
  */
 
+const original = { a: 1, b: 2 };
+const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
+
+const arr5 = [1, 3, 1, 3, 9, 3, 3, 9, 27];
+const entries = new Map();
+arr5.forEach((n) => {
+  if (entries.has(n)) {
+    let oldCount = entries.get(n).count;
+    let copy = { ...entries.get(n), count: oldCount + 1 };
+    entries.set(n, copy);
+  } else {
+    entries.set(n, { count: 1, r: 0, r2: 0 });
+  }
+});
+console.log('the final map....');
+entries.forEach(function(value, key) {
+  console.log(key + ' = ' + value.count);
+});
+
 /* brute force algorithm */
 const arr1 = [
   [1, 1, 1, 3, 9],
@@ -79,6 +99,7 @@ function findTriplets(arr) {
   }
   return sum;
 }
+/*
 let r = 3;
 arr4.forEach((a) => {
   let sum = 0;
@@ -86,3 +107,4 @@ arr4.forEach((a) => {
   sum = findTriplets(a);
   console.log(`sum: ${sum}`);
 });
+*/
