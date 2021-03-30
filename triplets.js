@@ -53,21 +53,50 @@
 const original = { a: 1, b: 2 };
 const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
 
-const arr5 = [1, 3, 1, 3, 9, 3, 3, 9, 27];
+function rCount(n) {
+  if (entries.has(n / r)) {
+    return entries.get(n / r).count;
+  } else {
+    return 0;
+  }
+}
+function r2Count(n) {
+  if (entries.has(n / r)) {
+    return entries.get(n / r).r;
+  } else {
+    return 0;
+  }
+}
+// const arr5 = [1, 3, 1, 3, 9, 3, 3, 9, 27];
+const arr5 = [1, 3, 1, 3, 9, 3, 3, 9, 27, 1, 3, 9];
+const r = 3;
 const entries = new Map();
+let sum = 0;
 arr5.forEach((n) => {
   if (entries.has(n)) {
-    let oldCount = entries.get(n).count;
-    let copy = { ...entries.get(n), count: oldCount + 1 };
-    entries.set(n, copy);
+    let rFactorCount = rCount(n);
+    let r2FactorCount = r2Count(n);
+    if (entries.has(n / r)) {
+      sum += r2FactorCount;
+    }
+    let newCount = entries.get(n).count + 1;
+    let newR = entries.get(n).r + rFactorCount;
+    let newR2 = entries.get(n).r2 + r2FactorCount;
+    entries.set(n, { count: newCount, r: newR, r2: newR2 });
   } else {
-    entries.set(n, { count: 1, r: 0, r2: 0 });
+    let rFactorCount = rCount(n);
+    let r2FactorCount = r2Count(n);
+    entries.set(n, { count: 1, r: rFactorCount, r2: r2FactorCount });
+    if (entries.has(n / r)) {
+      sum += r2FactorCount;
+    }
   }
 });
 console.log('the final map....');
 entries.forEach(function(value, key) {
-  console.log(key + ' = ' + value.count);
+  console.log(`${key}: ${value.count}, ${value.r}, ${value.r2}`);
 });
+console.log(`sum: ${sum}`);
 
 /* brute force algorithm */
 const arr1 = [
@@ -99,12 +128,11 @@ function findTriplets(arr) {
   }
   return sum;
 }
-/*
-let r = 3;
-arr4.forEach((a) => {
+// let r = 3;
+const arr6 = [[1, 3, 1, 3, 9, 3, 3, 9, 27, 1, 3, 9]];
+arr6.forEach((a) => {
   let sum = 0;
   console.log(a);
   sum = findTriplets(a);
   console.log(`sum: ${sum}`);
 });
-*/
