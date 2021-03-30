@@ -73,19 +73,19 @@ const r = 3;
 const entries = new Map();
 let sum = 0;
 arr5.forEach((n) => {
-  let rFactorCount = get_rCount(n);
-  let r2FactorCount = get_r2Count(n);
+  let rCount = get_rCount(n);
+  let r2Count = get_r2Count(n);
   if (entries.has(n)) {
     let newCount = entries.get(n).count + 1;
-    let newR = entries.get(n).r + rFactorCount;
+    let newR = entries.get(n).r + rCount;
     entries.set(n, { count: newCount, r: newR });
     if (entries.has(n / r)) {
-      sum += r2FactorCount;
+      sum += r2Count;
     }
   } else {
-    entries.set(n, { count: 1, r: rFactorCount });
+    entries.set(n, { count: 1, r: rCount });
     if (entries.has(n / r)) {
-      sum += r2FactorCount;
+      sum += r2Count;
     }
   }
 });
