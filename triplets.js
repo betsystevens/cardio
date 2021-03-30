@@ -53,14 +53,14 @@
 const original = { a: 1, b: 2 };
 const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
 
-function rCount(n) {
+function get_rCount(n) {
   if (entries.has(n / r)) {
     return entries.get(n / r).count;
   } else {
     return 0;
   }
 }
-function r2Count(n) {
+function get_r2Count(n) {
   if (entries.has(n / r)) {
     return entries.get(n / r).r;
   } else {
@@ -68,25 +68,22 @@ function r2Count(n) {
   }
 }
 // const arr5 = [1, 3, 1, 3, 9, 3, 3, 9, 27];
-const arr5 = [1, 3, 1, 3, 9, 3, 3, 9, 27, 1, 3, 9];
+const arr5 = [1, 3, 1, 3, 9, 3, 3, 9, 27, 1, 3, 9, 9, 27];
 const r = 3;
 const entries = new Map();
 let sum = 0;
 arr5.forEach((n) => {
+  let rFactorCount = get_rCount(n);
+  let r2FactorCount = get_r2Count(n);
   if (entries.has(n)) {
-    let rFactorCount = rCount(n);
-    let r2FactorCount = r2Count(n);
+    let newCount = entries.get(n).count + 1;
+    let newR = entries.get(n).r + rFactorCount;
+    entries.set(n, { count: newCount, r: newR });
     if (entries.has(n / r)) {
       sum += r2FactorCount;
     }
-    let newCount = entries.get(n).count + 1;
-    let newR = entries.get(n).r + rFactorCount;
-    let newR2 = entries.get(n).r2 + r2FactorCount;
-    entries.set(n, { count: newCount, r: newR, r2: newR2 });
   } else {
-    let rFactorCount = rCount(n);
-    let r2FactorCount = r2Count(n);
-    entries.set(n, { count: 1, r: rFactorCount, r2: r2FactorCount });
+    entries.set(n, { count: 1, r: rFactorCount });
     if (entries.has(n / r)) {
       sum += r2FactorCount;
     }
@@ -94,7 +91,7 @@ arr5.forEach((n) => {
 });
 console.log('the final map....');
 entries.forEach(function(value, key) {
-  console.log(`${key}: ${value.count}, ${value.r}, ${value.r2}`);
+  console.log(`${key}: ${value.count}, ${value.r}`);
 });
 console.log(`sum: ${sum}`);
 
@@ -121,7 +118,6 @@ function findTriplets(arr) {
       for (let k = j + 1; k <= arr.length - 1; k++) {
         if (arr[k] === arr[j] * r && arr[j] == arr[i] * r) {
           sum += 1;
-          console.log(`${arr[i]}, ${arr[j]}, ${arr[k]}`);
         }
       }
     }
@@ -129,7 +125,7 @@ function findTriplets(arr) {
   return sum;
 }
 // let r = 3;
-const arr6 = [[1, 3, 1, 3, 9, 3, 3, 9, 27, 1, 3, 9]];
+const arr6 = [[1, 3, 1, 3, 9, 3, 3, 9, 27, 1, 3, 9, 9, 27]];
 arr6.forEach((a) => {
   let sum = 0;
   console.log(a);
