@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    .box {
+      width: 50px;
+      height: 50px;
+      border: 4px solid blue;
+      background: blueviolet;
+      margin: 5px;
+      text-align: center;
+      line-height: 50px;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div id='root1'></div>
+  <div id='root2'></div>
+  <div id='root3'></div>
+
+  <script type="module">
+    //
+    // practice using React.createElement() and ReactDOM.render()
+    // multiple ways to pass children props to React.createElement()
+    // 'children' is a special property 
+    // 1) children can be passed in an array as the third argument
+    // 2) passed as 3rd, 4th, 5th, ... arguments
+    // 3) it can be specified in the second argument as the special 'children:' property
+    //
+    const box1 = React.createElement('div', {className:'box', key:1}, '1') 
+    const box2 = React.createElement('div', {className:'box', key:2}, '2') 
+    const box3 = React.createElement('div', {className:'box', key:3}, '3') 
+    const box4 = React.createElement('div', {className:'box', key:4}, '4') 
+    // children passed as a prop
+    const box5 = React.createElement('div', {className:'box', key:5, children: '5'}) 
+    const box6 = React.createElement('div', {className:'box', key:6, children: '6'})
+    const div = React.createElement('div', null, [box1, box2, box3, box4, box5, box6]);
+    // this works too, 3, 4, 5, 6... arguments are children props
+    // const div = React.createElement('div', null, box1, box2, box3, box4, box5, box6);
+    const root1El = document.getElementById('root1')
+    ReactDOM.render(div, root1El)
+
+    const childrenArray = []
+    for (let i = 0; i < 6; i++) {
+      childrenArray[i] =  React.createElement('div', {className:'box', key:i}, i)
+    }
+    // children passed as an array
+    const div2 = React.createElement('div', null, childrenArray)
+    const root2El = document.getElementById('root2')
+    ReactDOM.render(div2, root2El)
+
+    // children passed as a prop
+    const div3 = React.createElement('div', {children: childrenArray})
+    const root3El = document.getElementById('root3')
+    ReactDOM.render(div3, root3El)
+  </script>
+</body>
+</html>
