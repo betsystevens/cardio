@@ -4,3 +4,11 @@
 // 2. on end of file call a function, pass string as argument
 //    main(data)    // data it file read
 // 3. main does something amazing and returns a result
+
+var inputData = '';
+process.stdin.on('data', (data) => {
+  inputData += data;
+});
+process.stdin.on('end', (data) => {
+  console.log(inputData);
+});
