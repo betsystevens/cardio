@@ -9,6 +9,6 @@ var inputData = '';
 process.stdin.on('data', (data) => {
   inputData += data;
 });
-process.stdin.on('end', (data) => {
+process.stdin.on('end', () => {
   console.log(inputData);
 });
