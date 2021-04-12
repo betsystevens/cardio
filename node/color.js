@@ -28,3 +28,11 @@ log(color.blue(text));
 log(color.magenta(text));
 log(color.cyan(text));
 log(color.white(text));
+
+log(
+  color.red('red fish') +
+    ' ' +
+    color.cyan('cyan fish') +
+    ' ' +
+    color.magenta('magenta fish')
+);
