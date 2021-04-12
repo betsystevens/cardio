@@ -1,10 +1,8 @@
 'use strict';
 const log = console.log;
-
 /*
   returns string prefixed with ANSI color escape code 
   colorize.red('hello')
-
  */
 const colorize = () => {
   let reset = '\u001b[39m';
@@ -21,11 +19,12 @@ const colorize = () => {
 };
 
 let color = colorize();
-log(color.black('hello in black'));
-log(color.red('hello in red'));
-log(color.green('hello in green'));
-log(color.yellow('hello in yellow'));
-log(color.blue('hello in blue'));
-log(color.magenta('hello in magenta'));
-log(color.cyan('hello in cyan'));
-log(color.white('hello in white'));
+let text = 'some really cool text string';
+log(color.black(text));
+log(color.red(text));
+log(color.green(text));
+log(color.yellow(text));
+log(color.blue(text));
+log(color.magenta(text));
+log(color.cyan(text));
+log(color.white(text));
