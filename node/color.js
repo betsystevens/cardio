@@ -5,7 +5,8 @@ const log = console.log;
   colorize.red('hello')
  */
 const colorize = () => {
-  let reset = '\u001b[39m';
+  // let reset = '\u001b[39m';
+  let reset = '\u001b[m';
   let ESC = '\u001b[';
   return {
     black: (text) => `${ESC}30m` + text + reset,
@@ -20,8 +21,11 @@ const colorize = () => {
   };
 };
 
+// examples
+
+// base 8 colors
 let color = colorize();
-let text = 'some really cool text string';
+let text = 'a text string';
 log(color.black(text));
 log(color.red(text));
 log(color.green(text));
@@ -56,5 +60,13 @@ for (let i = 0; i < 8; i++) {
   let j = 2 * i;
   log(
     color.set(30 + i, words[2 * i]) + ' ' + color.set(90 + i, words[2 * i + 1])
+  );
+}
+log();
+// use colors 100-107
+for (let i = 0; i < 8; i++) {
+  let j = 2 * i;
+  log(
+    color.set(30 + i, words[2 * i]) + ' ' + color.set(100 + i, words[2 * i + 1])
   );
 }
